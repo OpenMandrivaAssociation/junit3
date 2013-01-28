@@ -1,6 +1,6 @@
 Name:		junit3
 Version:	3.8.2
-Release:	1
+Release:	2
 Summary:	Java regression test package
 License:	CPL
 Url:		http://www.junit.org/
@@ -57,16 +57,17 @@ ant dist
 install -d -m 755 %{buildroot}%{_javadir}
 install -m 644 junit%{version}/junit.jar %{buildroot}%{_javadir}/junit-%{version}.jar
 (cd %{buildroot}%{_javadir} && for jar in *-%{version}*; do ln -sf ${jar} ${jar/-%{version}/}; done)
-%add_to_maven_depmap junit junit %{version} JPP junit
+mv %buildroot%_javadir/junit.jar %buildroot%_javadir/junit3.jar
+%add_to_maven_depmap junit3 junit3 %{version} JPP junit3
 # pom 	 
 install -d -m 755 %{buildroot}%{_datadir}/maven2/poms 	 
-install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/maven2/poms/JPP-junit.pom
+install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/maven2/poms/JPP-junit3.pom
 # javadoc
-install -d -m 755 %{buildroot}%{_javadocdir}/junit
-cp -pr junit%{version}/javadoc/* %{buildroot}%{_javadocdir}/junit
+install -d -m 755 %{buildroot}%{_javadocdir}/junit3
+cp -pr junit%{version}/javadoc/* %{buildroot}%{_javadocdir}/junit3
 # demo
-install -d -m 755 %{buildroot}%{_datadir}/junit/demo/junit
-cp -pr junit%{version}/junit/* %{buildroot}%{_datadir}/junit/demo/junit
+install -d -m 755 %{buildroot}%{_datadir}/junit3/demo/junit
+cp -pr junit%{version}/junit/* %{buildroot}%{_datadir}/junit3/demo/junit
 
 # fix end-of-line 	 
 %{__perl} -pi -e 's/\r\n/\n/g' README.html
@@ -79,9 +80,9 @@ for i in `find $RPM_BUILD_ROOT%{_datadir}/junit -type f -name "*.java"`; do
     %{__perl} -pi -e 's/\r\n/\n/g' $i
 done
 
-install -d -m 755 %{buildroot}%{_docdir}/junit
-cp -p README.html %{buildroot}%{_docdir}/junit
-cp -par doc/* %{buildroot}%{_docdir}/junit
+install -d -m 755 %{buildroot}%{_docdir}/junit3
+cp -p README.html %{buildroot}%{_docdir}/junit3
+cp -par doc/* %{buildroot}%{_docdir}/junit3
 
 %post 	 
 %update_maven_depmap 	 
@@ -92,23 +93,23 @@ cp -par doc/* %{buildroot}%{_docdir}/junit
 %files
 %defattr(-,root,root,-)
 %{_javadir}/*
-%doc %dir %{_docdir}/junit
-%doc %{_docdir}/junit/README.html
+%doc %dir %{_docdir}/junit3
+%doc %{_docdir}/junit3/README.html
 %{_datadir}/maven2
 %{_mavendepmapfragdir}
 
 %files manual
 %defattr(-,root,root,-)
-%doc %{_docdir}/junit
-%exclude %{_docdir}/junit/README.html
+%doc %{_docdir}/junit3
+%exclude %{_docdir}/junit3/README.html
 
 %files javadoc
 %defattr(-,root,root,-)
-%{_javadocdir}/junit
+%{_javadocdir}/junit3
 
 %files demo
 %defattr(-,root,root,-)
-%{_datadir}/junit
+%{_datadir}/junit3
 
 
 %changelog
