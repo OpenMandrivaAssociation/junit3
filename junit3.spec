@@ -1,7 +1,7 @@
 Summary:	Java regression test package
 Name:		junit3
 Version:	3.8.2
-Release:	3
+Release:	4
 License:	CPL
 Group:		Development/Java
 Url:		http://www.junit.org/
