@@ -4,7 +4,7 @@ Version:	3.8.2
 Release:	9
 License:	CPL
 Group:		Development/Java
-Url:		http://www.junit.org/
+Url:		https://www.junit.org/
 Source0:	http://osdn.dl.sourceforge.net/junit/junit3.8.2.tar.bz2
 Source1:	junit3.8.2-build.xml
 Source2:	http://repo1.maven.org/maven2/junit/junit/3.8.2/junit-3.8.2.pom
